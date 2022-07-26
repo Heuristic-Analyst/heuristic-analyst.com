@@ -44,7 +44,7 @@ async function createDB() {
             DEFAULT CHARACTER SET = utf8;");
         pool.end();
         conn.end();
-    } catch {
+    } catch (err) {
         console.log("Something went wrong (creating database)");
         console.log(err);
         pool.end();
