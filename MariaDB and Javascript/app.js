@@ -87,9 +87,8 @@ async function insertData(trades, n) {
             sqlQueryValues = sqlQueryValues + ")";
             sqlQuery = "INSERT INTO trades (SymbolID, EventTime, Price, Quantity, TradeTime) VALUES " + sqlQueryValues;
             await conn.query(sqlQuery);
-            
-        trades.splice(0, n);
         }
+        trades.splice(0, n);
         pool.end();
         conn.end();
     } catch (err) {
