@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function makeCikDataCsv10Digits(full_file_path, encoding="utf8") {
+async function makeCikDataCsv10Digits(full_file_path, encoding="utf8") {
     console.log(full_file_path);
     var cik_data = fs.readFileSync(full_file_path, encoding);
     cik_data = cik_data.split('\n').map(x => x.split('","').map(element => element.replaceAll('"',"")));
@@ -72,7 +72,7 @@ function createSubmissionsCsvAndDescription(folder_path, folder_name, orig_subm_
     var orig_sub_data = JSON.parse(fs.readFileSync(folder_path+folder_name+"/"+orig_subm_data_file_name, encoding));
     // save description about company
     var descriptionData = {
-        "cik": orig_sub_data.cik,
+        "cik": cik_number,
         "name": orig_sub_data.name,
         "sic": orig_sub_data.sic,
         "sicDescription": orig_sub_data.sicDescription,
@@ -80,7 +80,7 @@ function createSubmissionsCsvAndDescription(folder_path, folder_name, orig_subm_
         "exchanges": orig_sub_data.exchanges,
         "addresses": orig_sub_data.addresses
     };
-    fs.writeFileSync(folder_path+folder_name+"/"+"description_"+descriptionData.cik+".json", JSON.stringify(descriptionData))
+    fs.writeFileSync(folder_path+folder_name+"/"+"description_"+cik_number+".json", JSON.stringify(descriptionData))
     console.log(new Date(), "LOG:", "Extracted description file from submissions data -", "description_"+cik_number+".json");
     // save all filings in "filings"
     var filingsOrder = orig_sub_data.filings.files.map((x) => {
@@ -98,7 +98,7 @@ function createSubmissionsCsvAndDescription(folder_path, folder_name, orig_subm_
             fullJsonData[String(i+1)] = JSON.parse(fs.readFileSync(folder_path+folder_name+"/"+filingsOrder[i][1], encoding));
         }
     }
-    fs.writeFileSync(folder_path+folder_name+"/"+"processed_submissions_data_"+descriptionData.cik+".csv", JsonToCsvType2(fullJsonData));
+    fs.writeFileSync(folder_path+folder_name+"/"+"processed_submissions_data_"+cik_number+".csv", JsonToCsvType2(fullJsonData));
     console.log(new Date(), "LOG:", "Extracted full submissions data -", "processed_submissions_data_"+cik_number+".csv");
 
 }

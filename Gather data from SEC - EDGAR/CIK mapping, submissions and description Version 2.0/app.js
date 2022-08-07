@@ -29,7 +29,7 @@ async function main(download_new_cik_data, download_new_submissions_data, user_a
             // Json to Csv
             await useful_functions.JsonFileToCsvFileType1(cik_data.folder_path[i]+cik_data.folder_name[i], cik_data.original_file_name[i], cik_data.processed_file_name[i]);
             // add additional zeros to the beggining of the Cik numbers - cik needs to be 10 digits
-            useful_functions.makeCikDataCsv10Digits(cik_data.folder_path[i]+cik_data.folder_name[i]+"/"+cik_data.processed_file_name[i]);
+            await useful_functions.makeCikDataCsv10Digits(cik_data.folder_path[i]+cik_data.folder_name[i]+"/"+cik_data.processed_file_name[i]);
             endTime = performance.now();
             // delay script - 10 requests per second - 1 request per 100 milliseconds
             if (endTime - startTime<100) {

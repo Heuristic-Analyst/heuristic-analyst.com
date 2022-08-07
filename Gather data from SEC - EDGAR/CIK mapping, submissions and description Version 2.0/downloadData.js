@@ -3,7 +3,6 @@ const axios = require("axios");
 
 async function downloadData(url_options, saving_folder_path, saving_folder_name, saving_file_name) {
   try {
-    const url_CikData = "https://www.sec.gov/files/company_tickers.json";
     if (!fs.existsSync(saving_folder_path+saving_folder_name)) {
       fs.mkdirSync(saving_folder_path+saving_folder_name);
     }
