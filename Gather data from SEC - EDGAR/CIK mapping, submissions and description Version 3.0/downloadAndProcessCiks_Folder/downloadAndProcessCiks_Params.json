@@ -1,0 +1,17 @@
+{
+    "url_attributes": {
+        "host": ["https://www.sec.gov"],
+        "path": ["/files/company_tickers.json"],
+        "headers": [{
+            "User-Agent": "UniversityResearch Timur t.oezsoy@t-online.de"
+        }]
+    },
+    "saving_attributes": {
+        "master_folder_path": ["../"],
+        "folder_name_of_file": ["cik_data/"],
+        "file_name": ["original_cik_data.json"]
+    },
+    "special_params": {
+        "processed_file_name": ["processed_cik_data.csv"]
+    }
+}
