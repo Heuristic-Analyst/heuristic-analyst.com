@@ -37,17 +37,3 @@ function sleep(milliseconds) {
 module.exports = {
     downloadAndSaveData
 }
-
-// var a = {
-//     "url_attributes": {
-//         "host":"https://data.sec.gov",
-//         "path":"/submissions/CIK0000037996.json",
-//         "headers": {"User-Agent":" UniversityResearch Timur t.oezsoy@t-online.de"}
-//     },
-//     "saving_attributes":{
-//         "master_folder_path":"./",
-//         "folder_name_of_file":"new/",
-//         "file_name":"loll.json"
-//     }
-// };
-// downloadAndSaveData(a);
