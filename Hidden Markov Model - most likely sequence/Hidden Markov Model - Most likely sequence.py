@@ -40,13 +40,13 @@ for i in range(len(eigenvectors)):
 ###########################################
 # which sequence is observable of the observable variable?
 # This will be the sequence we will compute the most likely Markov chain states sequence from
-sequence_of_observable_variable = ["happy", "sad", "sad", "happy", "sad"]
+sequence_of_observable_variable = ["happy", "happy", "sad"]
 
 # all observable states in one list
 observable_states = ["happy", "sad"]
 # Create happy/sad face probabilities dependent on the weather
 # cloudy, rainy, sunny
-B = [[0.15, 0.05, 0.7],  # happy face
+B = [[0.15, 0.05, 0.8],  # happy face
      [0.2, 0.7, 0.1]]    # sad face
 
 # standard library for combination/permutation/product of observable states
@@ -73,7 +73,6 @@ for product in products:
                # multiply with transition probability from step i-1 to i
                probability *= A[previous_state][current_state]
           probability *= B[observable_states.index(sequence_of_observable_variable[i])][states.index(product[i])]
-
      if probability > maximum_probability:
           maximum_probability = probability
           maximum_sequence = product
