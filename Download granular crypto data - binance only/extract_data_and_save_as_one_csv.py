@@ -1,20 +1,6 @@
 import zipfile
-import numpy as np
-import csv
-
-
-def read_csv_from_zip(zip_file_name, csv_file_name):
-    # Open the zip file in read-only mode
-    zip_file = zipfile.ZipFile(zip_file_name, 'r')
-    csv_file = zip_file.open(csv_file_name)
-    # Use numpy's genfromtxt function to read the CSV file
-    return list(np.genfromtxt(csv_file, delimiter=',', dtype=None))
-
-
-def save_to_csv(list_of_tuples, filename):
-  with open(filename, 'w', newline='') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerows(list_of_tuples)
+import pandas as pd
+import io
 
 
 if __name__ == "__main__":
@@ -34,8 +20,9 @@ if __name__ == "__main__":
          "NEARUSDT", "APTUSDT", "LOOMUSDT", "AAVEUSDT", "OPUSDT", "STXUSDT", "WBTCUSDT", "MTLUSDT", "SUSHIUSDT", "ALGOUSDT"]
 
     for crypto_pair in x:
-        print("Creating one csv file with data from:", crypto_pair, " (saving as)", crypto_pair + "_trades_data.csv ...")
+        print("Creating one csv file with data from:", crypto_pair, " (saving as", crypto_pair + "_trades_data.csv) ...")
         csv_contents = []
+        zip_file_names = []
         # Iterate over the last n days (the other way - begin with old data and add newer data)
         for j in range(n, 0, -1):
             # Subtract the loop index from the current date
@@ -43,6 +30,17 @@ if __name__ == "__main__":
             # Format the date as a string in the desired format
             date_str = dateToPrint.strftime("%Y-%m-%d")
             # Print the date
-            csv_contents = csv_contents + read_csv_from_zip(crypto_pair + "-trades-" + date_str + ".zip", crypto_pair + "-trades-" + date_str + ".csv")
-        save_to_csv(csv_contents, crypto_pair + "_trades_data.csv")
+            zip_file_names.append((crypto_pair + "-trades-" + date_str + ".zip"))
+        for zip_file in zip_file_names:
+            print("Currently at zip:", zip_file)
+            # Open the zip file
+            with zipfile.ZipFile(zip_file, 'r') as z:
+                # Extract the CSV file from the zip file
+                csv_file = z.namelist()[0]
+                csv_data = z.read(csv_file)
+                # Read the CSV data into a DataFrame and append it to the list
+                df = pd.read_csv(io.BytesIO(csv_data))
+                csv_contents.append(df)
+        print("Saving csv...")
+        pd.concat(csv_contents).to_csv(crypto_pair+".csv", index=False)
         print("Csv file created!")
