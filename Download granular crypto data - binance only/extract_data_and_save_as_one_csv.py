@@ -28,13 +28,10 @@ if __name__ == "__main__":
     n = 7
     # Cryptocurrency pairs to download data from
     x = ["BTCUSDT", "ETHUSDT", "XRPUSDT", "BNBUSDT", "LTCUSDT", "SOLUSDT", "MANAUSDT", "DOGEUSDT", "LINKUSDT",
-         "TRXUSDT",
-         "MATICUSDT", "ADUSDT", "DREPUSDT", "ATOMUSDT", "BCHUSDT", "LUNCUSDT", "APEUSDT", "DOTUSDT", "ETCUSDT",
-         "AVAXUSDT",
-         "SANDUSDT", "HIVEUSDT", "MASKUSDT", "SHIBUSDT", "DAShUSDT", "XMRUSDT", "WAVESUSDT", "GALAUSDT", "UNIUSDT",
+         "TRXUSDT", "MATICUSDT", "ADUSDT", "DREPUSDT", "ATOMUSDT", "BCHUSDT", "LUNCUSDT", "APEUSDT", "DOTUSDT", "ETCUSDT",
+         "AVAXUSDT", "SANDUSDT", "HIVEUSDT", "MASKUSDT", "SHIBUSDT", "DAShUSDT", "XMRUSDT", "WAVESUSDT", "GALAUSDT", "UNIUSDT",
          "EOSUSDT", "FILUSDT", "AXSUSDT", "CHZUSDT", "FTMUSDT", "VOXELUSDT", "ZECUSDT", "XLMUSDT", "DYDXUSDT",
-         "NEARUSDT",
-         "APTUSDT", "LOOMUSDT", "AAVEUSDT", "OPUSDT", "STXUSDT", "WBTCUSDT", "MTLUSDT", "SUSHIUSDT", "ALGOUSDT"]
+         "NEARUSDT", "APTUSDT", "LOOMUSDT", "AAVEUSDT", "OPUSDT", "STXUSDT", "WBTCUSDT", "MTLUSDT", "SUSHIUSDT", "ALGOUSDT"]
 
     for crypto_pair in x:
         print("Creating one csv file with data from:", crypto_pair, " (saving as)", crypto_pair + "_trades_data.csv ...")
