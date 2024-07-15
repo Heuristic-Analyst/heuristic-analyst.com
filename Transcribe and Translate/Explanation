@@ -1,0 +1,7 @@
+I wanted a program that records what I was saying and can output it as text (Speech to Text / Transcribe).
+I used the whisper model(s) (through faster-whisper) for it and run them on a cpu.
+Audio capturing is done with pyaudio.
+
+Because I am using whisper, i can also translate everything into english.
+I then created a gui out of everything and converted it for portability reasons into 2 .EXE files, one with the base model, one with the medium model.
+I also included the python script so you can see how I have done it.
