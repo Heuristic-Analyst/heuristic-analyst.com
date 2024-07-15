@@ -1,0 +1,5 @@
+To create and manage python virtual environments one can use the python library "venv".
+
+Using ChatGPT I first created the python code that creates a GUI to find python versions installed on the pc, create virtual environments, activate, deactivate aswell as remove them. Pretty self explanatory.
+
+Then I converted the python script (which I called "venv_manager.py") into a standalone .EXE using the python library "pyinstaller" using the following command: "pyinstaller --onefile --windowed venv_manager.py"
