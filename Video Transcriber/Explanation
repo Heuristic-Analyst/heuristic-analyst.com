@@ -1,0 +1,4 @@
+This is a python script for video transciption - .mp4, but can also be very large file.
+
+You simply run it via the cmd with "python video_transcriber.py". Then you can select your video and the script does the rest. It then saves the text in a text file, same name as the video.
+I run whisper on my gpu tho, so you need to adjust it if you do not have cuda or want to use it on your cpu because of other reasons.
