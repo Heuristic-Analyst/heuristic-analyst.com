@@ -6,6 +6,7 @@ Because I am using whisper, i can also translate everything into english.
 I also included the python script so you can see how I have done it (with GUI).
 
 I then converted it for portability reasons into 2 .EXE files, one with the base model, one with the medium model.
-I wanted to upload it but the one application is 360MB and the other about 2.3GB, and Github doesn't allow me to upload it.
+I wanted to upload it both, but the other is about 2.3GB large, and Github doesn't allow me to upload it, even with LFS.
 --> If you want it to convert by yourself, good luck, because I used virtual enviroments throughout this project and the model is an extern folder, I needed to 
-    somehow hook something and do other stuff, finding dlls and more. I got it only to work because I uploaded the script to claude.ai and asked it how to do it lol, so do the same
+    somehow hook something and do other stuff, finding dlls and more. I got it only to work because I uploaded the script to claude.ai and asked it how to do it lol, 
+    and after a lot of back and forth, that the model folder isn't included it understood what was wrong - so do the same
