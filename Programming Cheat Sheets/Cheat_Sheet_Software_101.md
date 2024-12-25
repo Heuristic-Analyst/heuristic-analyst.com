@@ -1,6 +1,6 @@
 # Event-Driven Programming Pattern
 
-*"How most of the software is run, it fist initialising some code, then many callbacks are created, and then a window or something is created that waits until x is pressed and the program is closed, but until then every callback can be triggered*"
+*"How most of the software is run, it fist initialising some code, then many callbacks are created, and then a window or something is created that waits until the x button to close the program is pressed and the program is then closed, but until then every callback can be triggered*"
 
 Most software follows this event-driven pattern:
 ## General Flow
