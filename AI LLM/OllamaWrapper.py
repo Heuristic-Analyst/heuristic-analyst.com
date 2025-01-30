@@ -1,3 +1,16 @@
+"""
+This code lets you chat with llm models run with Ollama - so a Ollama Wrapper
+This code uses only the original Ollama API, using requests and json
+
+It first creates a session with the Ollama server that should run in the background.
+Then one create blank conversations by initializing the .start_chat function which takes the model name as a parameter
+Then one can chat with the model by using the .chat function. If you want to stream the message from the llm, so that every word pops up after its generated, to not wait until the whole answer is been generated, 
+  you need also to do stream=True
+I also implemented a print param so it prints automatically for stream True and False accordingly!
+
+I import this class into the main.py so you can see examples of how to do it.
+"""
+
 # Import necessary libraries
 import requests  # Handles HTTP requests to communicate with the Ollama server
 import json      # Converts Python objects to/from JSON format for API communication
