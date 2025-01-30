@@ -6,14 +6,9 @@ It first creates a session with the Ollama server that should run in the backgro
 Then one create blank conversations by initializing the .start_chat function which takes the model name as a parameter
 Then one can chat with the model by using the .chat function. If you want to stream the message from the llm, so that every word pops up after its generated, to not wait until the whole answer is been generated, 
   you need also to do stream=True
+I also implemented a print param so it prints automatically for stream True and False accordingly!
 
 Below you can see examples of how to do it.
-
-One response is wrapped in an try except block to show that if done properly it is safe to use ctrl+c to stop the respond, because:
-- The Ollama server will automatically cancel the request
-- Your message history stays intact
-- No corruption occurs
-- You can immediately start new chats
 """
 
 # Import necessary libraries
@@ -40,7 +35,7 @@ class Ollama:
             self.messages = []    # Stores all messages in order: user, AI, user, AI...
         
         # Main method to send messages to the AI
-        def chat(self, message, stream=False, **kwargs):
+        def chat(self, message, stream=False, print_response=False, **kwargs):
             # Add user's message to history
             self.messages.append({"role": "user", "content": message})
             
@@ -58,10 +53,22 @@ class Ollama:
                 assistant_message = response['message']['content']
                 # Save AI's response to history
                 self.messages.append({"role": "assistant", "content": assistant_message})
+                # Print if requested
+                if print_response:
+                    print(assistant_message)
                 return assistant_message  # Return full text
             else:
                 # For streaming responses (word by word)
-                return self._stream_handler(response)
+                if print_response:
+                    full_response = []
+                    # Process generator and print chunks
+                    for chunk in self._stream_handler(response):
+                        print(chunk, end='', flush=True)
+                        full_response.append(chunk)
+                    print()  # Ensure newline after streaming
+                    return ''.join(full_response)
+                else:
+                    return self._stream_handler(response)
 
         # Handles word-by-word streaming responses
         def _stream_handler(self, response):
@@ -113,38 +120,25 @@ if __name__ == "__main__":
     # Create connection to Ollama
     ollama = Ollama()  # Uses default localhost:11434
 
-    # Start chat with 1.5B model (creates first conversation notebook)
-    first_chat = ollama.start_chat("deepseek-r1:1.5b")
+    # Start chat with 14B model (creates first conversation notebook)
+    ai_agent_one = ollama.start_chat("deepseek-r1:14b")
     
-    # First question with streaming response
-    print("First response (streaming):")
-    try:
-        # Start streaming request
-        stream = first_chat.chat("Explain quantum entanglement to a 5 year old", stream=True)
-        # Print each word as it arrives
-        for chunk in stream:
-            print(chunk, end='', flush=True)  # end='' prevents newlines between chunks
-    except KeyboardInterrupt:
-        # Handle Ctrl+C gracefully
-        #first_chat.messages.pop()  # Remove the last user message if needed
-        print("\n\nStream interrupted by user!")  # Partial response not saved
+    # First question with streaming response and auto-printing
+    print("First response (streaming with auto-print):")
+    ai_agent_one.chat("Can you explain quantum entanglement to a 5 year old?", stream=True, print_response=True)
 
-    # Follow-up question using same chat (maintains context)
-    print("\n\nFollow-up (non-streaming):")
-    # Regular (non-streaming) request
-    follow_up_response = first_chat.chat("Now explain it to a physics PhD student")
-    print(follow_up_response)  # Print complete response at once
+    # Follow-up question with auto-printing (non-streaming)
+    print("\n\nFollow-up (non-streaming with auto-print):")
+    ai_agent_one.chat("I forgot what I said to you, what did I ask you? Simply repeat the question", print_response=True)
 
-    # Switch to 14B model (creates new conversation notebook)
+    # Switch to 1.5B model (creates new conversation notebook)
     print("\nSwitching to 14B model:")
-    second_chat = ollama.start_chat("deepseek-r1:14b")  # Old chat remains but unused
+    second_chat = ollama.start_chat("deepseek-r1:1.5b")  # Old chat remains but unused
     
-    # Simple question to new model
-    print("Simple math question:")
-    print(second_chat.chat("What's 2+2?"))  # New chat has empty history
+    # Simple question to new model with auto-print
+    print("Simple math question with auto-print:")
+    second_chat.chat("What's 2+2?", print_response=True)
 
-    # New streaming request with different model
-    print("\n14B model streaming response:")
-    new_stream = second_chat.chat("Explain neural networks briefly", stream=True)
-    for chunk in new_stream:
-        print(chunk, end='', flush=True)
+    # Streaming request with different model and auto-print
+    print("\n1.5B model streaming response with auto-print:")
+    second_chat.chat("Explain neural networks briefly", stream=True, print_response=True)
