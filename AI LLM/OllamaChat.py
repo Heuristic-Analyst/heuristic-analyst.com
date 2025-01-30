@@ -1,5 +1,5 @@
 """
-This code lets you chat with llm models run with Ollama
+This code lets you chat with llm models run with Ollama - so a Ollama Wrapper
 This code uses only the original Ollama API, using requests and json
 
 It first creates a session with the Ollama server that should run in the background.
