@@ -1,0 +1,18 @@
+services:
+  ollama:
+    image: ollama/ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      # 1. This saves models to a folder named 'ollama_models' in your current directory
+      - ./ollama_models:/root/.ollama
+    restart: always
+    tty: true # Keeps the container running
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all # Uses your RTX 3070
+              capabilities: [gpu]
