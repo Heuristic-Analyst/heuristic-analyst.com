@@ -1,0 +1,9 @@
+# docker-compose.yml
+services:
+  dev:
+    image: python:3.12
+    container_name: programming_environment
+    volumes:
+      - .:/app # mounts your code into the container
+    working_dir: /app
+    command: sleep infinity # keeps container running
