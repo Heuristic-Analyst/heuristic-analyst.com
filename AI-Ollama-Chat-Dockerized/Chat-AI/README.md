@@ -1,3 +1,7 @@
+Chat with AI locally
+
+
+
 To create Python Environment, as its definition is written in Docker-compose.yml:
 docker compose up -d
 
