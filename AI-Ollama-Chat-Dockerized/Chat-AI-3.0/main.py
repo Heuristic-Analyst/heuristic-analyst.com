@@ -47,7 +47,6 @@ while True:
         continue
 
     print()
-    break
 
 # Optionally save the conversation
 # chat.save_conversation("saved_conversations/conversation.json")
