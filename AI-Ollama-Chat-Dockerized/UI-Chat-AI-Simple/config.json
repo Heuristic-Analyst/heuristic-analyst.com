@@ -1,0 +1,11 @@
+{
+  "ollama_host": "http://host.docker.internal:11434",
+  "chat_model": "qwen3:30b-a3b",
+  "system_prompt_path": "./prompt_templates/system_prompt.md",
+  "conversations_dir": "./saved_conversations",
+  "think": true,
+  "keep_alive": -1,
+  "stream": true,
+  "num_ctx": 8384,
+  "port": 5000
+}
